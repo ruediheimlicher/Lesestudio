@@ -1,0 +1,21 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSDatePicker; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = REinstellungen; LANGUAGE = ObjC; SUPERCLASS = NSPanel; }, 
+        {CLASS = RPEinstellungen; LANGUAGE = ObjC; SUPERCLASS = NSDrawer; }, 
+        {
+            ACTIONS = {reportCancel = id; reportClose = id; showEinstellungen = id; }; 
+            CLASS = rEinstellungen; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                BewertungZeigen = id; 
+                NoteZeigen = id; 
+                TimeoutCombo = id; 
+                mitUserPasswort = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

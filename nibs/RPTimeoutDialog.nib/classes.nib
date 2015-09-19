@@ -1,0 +1,28 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = REinstellungen; LANGUAGE = ObjC; SUPERCLASS = NSPanel; }, 
+        {CLASS = RPEinstellungen; LANGUAGE = ObjC; SUPERCLASS = NSDrawer; }, 
+        {
+            ACTIONS = {reportAbmelden = id; reportUnterbrechen = id; }; 
+            CLASS = rEinstellungen; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {Icon = id; Textfeld = id; Zeitfeld = id; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {reportAbmelden = id; reportUnterbrechen = id; }; 
+            CLASS = rTimeoutDialog; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                Icon = id; 
+                LesestudioString = id; 
+                StartFeld = id; 
+                TitelString = id; 
+                Zeitfeld = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

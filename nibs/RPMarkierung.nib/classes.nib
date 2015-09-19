@@ -1,0 +1,19 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = "java.lang.Object"; LANGUAGE = Java; }, 
+        {
+            ACTIONS = {reportAbbrechen = id; reportMarkierungVariante = id; }; 
+            CLASS = rMarkierung; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                MarkierungVariante = id; 
+                NamenString = id; 
+                TextString = id; 
+                TitelString = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

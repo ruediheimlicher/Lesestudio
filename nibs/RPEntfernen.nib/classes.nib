@@ -1,0 +1,20 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = "java.lang.Object"; LANGUAGE = Java; }, 
+        {
+            ACTIONS = {
+                OKSheet = id; 
+                cancelSheet = id; 
+                inMagazin = id; 
+                inPapierkorb = id; 
+                sofortWeg = id; 
+            }; 
+            CLASS = rEntfernen; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {EntfernenVariante = id; TextString = id; TitelString = id; }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

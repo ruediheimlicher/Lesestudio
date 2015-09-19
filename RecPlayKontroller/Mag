@@ -1,0 +1,86 @@
+
+- (IBAction)startQTKitRecord:(id)sender
+{
+
+	if ([self isRecording])
+	{
+	NSLog(@"Aufnahme in Gang");
+	return;
+	}
+	
+	
+	istNeueAufnahme=1;
+	OSErr err=0;
+
+	[RecordQTKitPlayer setMovie:[QTMovie movie]];
+	if ([[RecordQTKitPlayer movie]duration].timeValue)
+	{
+	QTTime t=[[RecordQTKitPlayer movie]duration];
+	float Zeit=(float)(t.timeValue)/t.timeScale;
+	NSLog(@"startQTKitRecord schon ein Movie da. duration: %2.2f",Zeit);
+	}
+	
+	[Abspieldauerfeld setStringValue:@""];
+	[Abspielanzeige setLevel:0];
+	[Abspielanzeige setNeedsDisplay:YES];
+	Pause=0;
+	
+	//int erfolg=[[self RecPlayFenster]makeFirstResponder:[self RecPlayFenster]];
+	[[TitelPop cell] addItemWithObjectValue:[[TitelPop cell]stringValue]];
+	[[TitelPop cell] setEnabled:NO];
+	Aufnahmedauer=0;
+	[Zeitfeld setStringValue:@"00:00"];
+	
+	
+	Leser=[ArchivnamenPop titleOfSelectedItem];
+	int n=[ArchivnamenPop indexOfSelectedItem];
+	//NSLog(@"Selected Item: %d",n);
+	//NSLog(@"startRecord:Selected Item: %d		Leser: %@",n,Leser);
+	if ([ArchivnamenPop indexOfSelectedItem]==0)
+	{
+		NSAlert *NamenWarnung = [[[NSAlert alloc] init] autorelease];
+		[NamenWarnung addButtonWithTitle:NSLocalizedString(@"I Will",@"Aufforderung Namen angeben")];
+		//[RecorderWarnung addButtonWithTitle:@"Cancel"];
+		[NamenWarnung setMessageText:NSLocalizedString(@"Who are You?",@"Frage nach Namen")];
+		[NamenWarnung setInformativeText:NSLocalizedString(@"You must choose your name before recording.",@"Gib Namen ein")];
+		[NamenWarnung setAlertStyle:NSWarningAlertStyle];
+		[NamenWarnung beginSheetModalForWindow:RecPlayFenster 
+								 modalDelegate:nil
+								didEndSelector:nil
+								   contextInfo:nil];
+		NSImage* StartRecordImg=[NSImage imageNamed:@"StartRecordImg.tif"];
+		[[StartStopKnopf cell]setImage:StartRecordImg];
+		[StartStopString setStringValue:@"START"];
+		return;
+	}
+	
+	NSFileManager *Filemanager=[NSFileManager defaultManager];	
+	BOOL sauberOK=0;
+//	sauberOK=[Filemanager removeFileAtPath:neueAufnahmePfad handler:nil];
+//	sauberOK=[Filemanager createFileAtPath:neueAufnahmePfad contents:NULL attributes:NULL];
+	NSLog(@"startQTKitRecord sauberOK: %d",sauberOK);
+	NSLog(@"startQTKitRecord neueAufnahmePfad: %@",neueAufnahmePfad);
+
+// Begin QTKit-Stuff
+//	[mCaptureMovieFileOutput recordToOutputFileURL:[NSURL fileURLWithPath:@"/Users/sysadmin/Documents/LesestudioMovie.mov"]];
+	[mCaptureMovieFileOutput recordToOutputFileURL:[NSURL fileURLWithPath:neueAufnahmePfad]];
+	audioLevelTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateAudioLevels:) userInfo:nil repeats:YES];
+	[audioLevelTimer retain];
+	NSLog(@"startRecording neueAufnahmePfad: %@ audioLevelTimer: %@ ",neueAufnahmePfad,[audioLevelTimer description]);
+	uint64 filesize =[movieFileOutput  recordedFileSize];
+	QTTime duration =[mCaptureMovieFileOutput  recordedDuration];
+	
+	QTKitGesamtAufnahmezeit=0;
+	QTKitPause=0;
+	GesamtAufnahmezeit=0;
+	//NSLog(@"Error nach StartRecord:%d",err);
+	[StartPlayQTKitKnopf setEnabled:NO];
+	
+	
+	[StopPlayQTKitKnopf setEnabled:NO];
+	[SichernKnopf setEnabled:NO];
+	[WeitereAufnahmeKnopf setEnabled:NO];
+	[StopRecordQTKitKnopf setEnabled:YES];
+	[BackKnopf setEnabled:NO];
+
+}
