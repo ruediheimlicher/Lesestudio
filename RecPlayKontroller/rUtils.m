@@ -689,53 +689,64 @@ return versionOK;
 	  NSLog(@"Keine Lesebox da: %@  DeleteOK: %d",derLeseboxPfad,DeleteOK);
 
 	  NSString* LString1=@"Lesebox kann anlegt werden";
-	  NSString* LString2=@"Klassenliste muss vorhanden sein";
+	  NSString* LString2=@"\nKlassenliste muss vorhanden sein";
 	  NSLog(@"LString1: %@ LString2: %@",LString1,LString2);
 	  NSString* LeseboxString=[LString1 stringByAppendingString:LString2];
 	  
-	  int Antwort=NSRunAlertPanel(@"Neue Lesebox einrichten:", LeseboxString,@"Anlegen",@"Beenden",nil);
-	  NSLog(@"Neue  Lesebox: Antwort: %d",Antwort);
-	  switch (Antwort)
+     NSAlert *Warnung = [[NSAlert alloc] init];
+     [Warnung addButtonWithTitle:@"Beenden"]; // 1000
+     [Warnung addButtonWithTitle:@"Anlegen"]; // 1001
+     
+     [Warnung setMessageText:@"Neue Lesebox einrichten"];
+     [Warnung setInformativeText:LeseboxString];
+     [Warnung setAlertStyle:NSWarningAlertStyle];
+     int Antwort=[Warnung runModal];
+
+	  
+     NSLog(@"Neue  Lesebox: Antwort: %d",Antwort);
+	  
+     
+     switch (Antwort)
 	  {
-		  case 1:
+		  case 1001:
 		  {			
 			  LeseboxValid=[Filemanager createDirectoryAtPath:derLeseboxPfad  withIntermediateDirectories:NO attributes:NULL error:NULL];
 			  //NSLog(@"LeseBoxVorhandenAnPfad: LeseboxVorhanden: %d",LeseboxValid);
 			  
 			  if (!LeseboxValid)
-			  {
-				  NSString* c1= NSLocalizedString(@"The folder 'Lecturebox' cannot be created on the choosen computer",@"Keine Lesebox auf Computer");
-				  NSString* c2= NSLocalizedString(@"Perhaps the user permissions do not allow this",@"Benutzungsrechte fraglich");
-				  NSString* WarnString=[NSString stringWithFormat:@"%@\r%@",c1,c2];
-              //NSString* TitelStringLB=NSLocalizedString(@"Create Lecturebox:",@"Lesebox einrichten:");
-				  NSString* TitelStringLB=@"Lesebox einrichten:";
-				  
-				  
-				  
-				  int Antwort=NSRunAlertPanel(TitelStringLB,WarnString,BeendenString, nil,nil);
-			  //Beenden
-				NSMutableDictionary* BeendenDic=[[NSMutableDictionary alloc]initWithCapacity:0];
-				[BeendenDic setObject:[NSNumber numberWithInt:1] forKey:@"beenden"];
-				NSNotificationCenter* beendennc=[NSNotificationCenter defaultCenter];
-				[beendennc postNotificationName:@"externbeenden" object:self userInfo:BeendenDic];
-				  
-			  }
+           {
+              NSString* c1= @"Es keine Lesebox auf diesem Volume eingerichtet werden.";
+              NSString* c2= @"Eventuell liegt es an den Benutzungsrechten.";
+              NSString* WarnString=[NSString stringWithFormat:@"%@\r%@",c1,c2];
+              NSString* TitelStringLB=@"Lesebox einrichten:";
+              
+              NSAlert *Warnung = [[NSAlert alloc] init];
+              [Warnung addButtonWithTitle:@"Beenden"]; // 1000
+              
+              [Warnung setMessageText:TitelStringLB];
+              [Warnung setInformativeText:LeseboxString];
+              [Warnung setAlertStyle:NSWarningAlertStyle];
+              int Antwort=[Warnung runModal];
+
+              [NSApp terminate:self];
+              
+              
+           }
 		  }break;
 			  
-		  case 0:
+		  case 1000:
 		  {
-			  NSString* WarnString=NSLocalizedString(@"The lecturebox must be created manually on the choosen computer",@"LB manuelleinrichten");
-			  WarnString=[WarnString stringByAppendingString:NSLocalizedString(@"The applicatin will terminate",@"Programm beenden")];
-			  NSString* TitelStringNeueLB=NSLocalizedString(@"Neue Lesebox einrichten:",@"Neue Lesebox einrichten:");
+			  NSString* WarnString=@"Die Lesebox muss eventuell manuell eingerichtet werden.";
+			  WarnString=[WarnString stringByAppendingString:@"\rDas Programm wird beendet."];
+			  NSString* TitelStringNeueLB=@"Neue Lesebox einrichten:";
 			  
-			  int Antwort=NSRunAlertPanel(TitelStringNeueLB, WarnString,BeendenString, nil,nil);
+			  int Antwort=NSRunAlertPanel(TitelStringNeueLB, WarnString,@"OK", nil,nil);
 			  
 			  //Beenden
-				NSMutableDictionary* BeendenDic=[[NSMutableDictionary alloc]initWithCapacity:0];
-				[BeendenDic setObject:[NSNumber numberWithInt:1] forKey:@"beenden"];
-				NSNotificationCenter* beendennc=[NSNotificationCenter defaultCenter];
-				[beendennc postNotificationName:@"externbeenden" object:self userInfo:BeendenDic];
+           [NSApp terminate:self];
 		  }break;
+           
+           
 	  }
 	  
   }//exists not at LeseboxPfad
@@ -762,7 +773,7 @@ return versionOK;
 	ArchivValid=[Filemanager createDirectoryAtPath:tempArchivPfad  withIntermediateDirectories:NO attributes:NULL error:NULL];
 	if (!ArchivValid)
 	  {
-	  NSString* WarnString=NSLocalizedString(@"The folder 'Archive' cannot be created on the choosen computer",@"Auf dem Computer kein Archiv eingerichtet");
+	  NSString* WarnString=@"Auf dem Computer kann kein Archiv eingerichtet werden.";
 	  int Antwort=NSRunAlertPanel(TitelStringArchiv, WarnString,BeendenString, nil,nil);
   //Beenden
 	NSMutableDictionary* BeendenDic=[[NSMutableDictionary alloc]initWithCapacity:0];
@@ -1461,7 +1472,6 @@ return versionOK;
 	NSMutableArray* tempProjektArray=[[NSMutableArray alloc]initWithCapacity:0];
 	NSString* tempDataPfad=[derLeseboxPfad stringByAppendingPathComponent:@"Data"];
    NSString* PListName=@"Lesebox.plist";
-	//NSString* PListName=NSLocalizedString(@"Lecturebox.plist",@"Name Lesebox.plist");
 	NSString* tempPListPfad=[tempDataPfad stringByAppendingPathComponent:PListName];
 
 	NSFileManager *Filemanager=[NSFileManager defaultManager];
@@ -1763,7 +1773,7 @@ return versionOK;
 	NSLog(@"ProjektordnerEinrichten: %@",derProjektPfad);
 	NSFileManager *Filemanager=[NSFileManager defaultManager];
 	
-	NSString* BeendenString=NSLocalizedString(@"Beenden",@"Beenden");
+	NSString* BeendenString=@"Beenden";
 	NSString* tempArchivPfad=[derProjektPfad stringByDeletingLastPathComponent];
 	NSString* tempProjektName=[derProjektPfad lastPathComponent];
 	BOOL OrdnereinrichtenOK=YES;
@@ -1772,11 +1782,11 @@ return versionOK;
 	if (!erfolg)//Kein Ordner für das Projekt
 	{
 		NSAlert *Warnung = [[NSAlert alloc] init];
-		[Warnung addButtonWithTitle:NSLocalizedString(@"Skip",@"Taste: Überspringen")];
-		[Warnung addButtonWithTitle:NSLocalizedString(@"Create manually",@"Taste: Manuell einrichten")];
-		[Warnung setMessageText:NSLocalizedString(@"No Project in Archiv",@"Kein Projekt")];
-		NSString* InfoString1=NSLocalizedString(@"Creation of folder for %@ failed",@"Der Ordner für %@ konnte nicht eingerichtet werden");
-		NSString* InfoString2=NSLocalizedString(@"Maybe the name already exists",@"Name ev schon vorhanden");
+		[Warnung addButtonWithTitle:@"Überspringen"];
+		[Warnung addButtonWithTitle:@"Manuell einrichten"];
+		[Warnung setMessageText:@"Kein Projekt im Archiv"];
+		NSString* InfoString1=@"Der Ordner für %@ konnte nicht eingerichtet werden";
+		NSString* InfoString2=@"Name eventuell schon vorhanden";
 		NSString* InformationString=[NSString stringWithFormat:InfoString1,InfoString2,tempProjektName];
 		[Warnung setInformativeText:InformationString];
 		[Warnung setAlertStyle:NSWarningAlertStyle];
@@ -1997,9 +2007,9 @@ return versionOK;
 			if (anzOrdner<anzZeilen)
 			{
 				//NSLog(@"vor alert");
-				NSString* InformationString=NSLocalizedString(@"The Folders for \n%@ could not be created",@"Keine Projektordner für %@");
-				NSAlert* Warnung=[NSAlert alertWithMessageText:NSLocalizedString(@"Missing folders","Fehlende Ordner")
-												 defaultButton:NSLocalizedString(@"Continue",@"Weiterfahren")
+				NSString* InformationString=@"Es konne keine Projektordner für %@ eingerichtet werden.";
+				NSAlert* Warnung=[NSAlert alertWithMessageText:@"Fehlende Ordner"
+												 defaultButton:@"Weiterfahren"
 											   alternateButton:BeendenString
 												   otherButton:nil
 									 informativeTextWithFormat:InformationString,fehlendeOrdner];
@@ -2030,8 +2040,8 @@ return versionOK;
 			//[Warnung addButtonWithTitle:@""];
 			//[Warnung addButtonWithTitle:@"Abbrechen"];
 			[Warnung setMessageText:[NSString stringWithFormat:@"%@",@"Leere NamenListe"]];
-			NSString* s1=NSLocalizedString(@"The project","Das Projekt");
-			NSString* s2=NSLocalizedString(@"No valid Names","Keine gültigen Namen.");
+			NSString* s1=@"Das Projekt ";
+			NSString* s2=@"hat keine gültigen Namen.";
 			
 			NSString* s3=@"Das Projekt wird nicht angelegt.";
 			
@@ -2569,6 +2579,8 @@ return versionOK;
       }
       
    }//while
+   
+   [fehlendeOrdnerArray removeObject:@""];
    NSLog(@"*UNamenEinsetzenAktion  fehlendeOrdnerArray:%@",[fehlendeOrdnerArray description]);
    NSLog(@"*UNamenEinsetzenAktion  eingesetzteNamenArray:%@",[eingesetzteNamenArray description]);
 	
@@ -2576,7 +2588,7 @@ return versionOK;
 	{
 		NSAlert *Warnung = [[NSAlert alloc] init];
 		[Warnung addButtonWithTitle:@"OK"];
-		NSString* s1=NSLocalizedString(@"The folder %@ couldn't be created for some projects:",@"Kein Ordner für einige Projekte");
+		NSString* s1=@"Kein Ordner für  Projekte %@";
 		//[Warnung setMessageText:[NSString stringWithFormat:@"Der Ordner für  %@ konnte in einigen Projekten nicht eingerichtet werden:",tempNeuerName]];
 		[Warnung setMessageText:[NSString stringWithFormat:s1,fehlendeOrdnerArray]];
 		
@@ -2694,8 +2706,8 @@ NSLog(@"showTimeoutDialog");
 
 //	NSModalSession TimeoutSession=[NSApp beginModalSessionForWindow:[UTimeoutDialogPanel window]];
 	[UTimeoutDialogPanel setZeit:10];
-	NSString* string1=NSLocalizedString(@"There was no activity for the given time",@"Keine Altivität");
-	NSString* string2=[NSString stringWithFormat:NSLocalizedString(@"Logout will occur in %d seconds",@"Timeout in xx secconds"),Zeit];
+	NSString* string1=@"Keine Aktivität in der letzten Zeit.";
+	NSString* string2=[NSString stringWithFormat:@"Logout in %d Sekunden",Zeit];
 	//NSLog(@"string2: %@",string2);
 	NSString* TimeoutString=[NSString stringWithFormat:@"%@\n%@",string1,string2];
 	//NSLog(@"TimeoutString: %@",TimeoutString);
@@ -3079,7 +3091,6 @@ OSErr rUtils_AddUserDataTextToMovie (Movie theMovie, char *theText, OSType theTy
 - (BOOL) setPListBusy:(BOOL)derStatus anPfad:(NSString*)derPfad
 {
 	NSFileManager *Filemanager=[NSFileManager defaultManager];
-	//NSString* PListName=NSLocalizedString(@"Lecturebox.plist",@"Lesebox.plist");
    NSString* PListName=@"Lesebox.plist";
 
 	NSString* PListPfad;

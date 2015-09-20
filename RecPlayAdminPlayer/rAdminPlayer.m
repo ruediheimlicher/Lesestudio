@@ -3241,8 +3241,8 @@ const short kRecPlayUmgebung=0;
 		BOOL magazinOK=[Filemanager createDirectoryAtPath:tempMagazinPfad  withIntermediateDirectories:NO attributes:NULL error:NULL];
 		if (!magazinOK)
 		  {
-			NSString* s1=NSLocalizedString(@"The folder 'Magazin' could not be created in folder 'Lecturebox'",@"Ordner 'Magazin' im Ordner 'Lesebox' nicht eingerichtet");
-			NSString* s2=NSLocalizedString(@"The Record was not moved",@"Aufnahme nicht verschoben");
+			NSString* s1=@"Der Ordner 'Magazin' im Ordner 'Lesebox' konnte nicht eingerichtet werden.";
+			NSString* s2=@"Die Aufnahme wurde nicht verschoben";
 			NSString* MagazinString=[NSString stringWithFormat:@"%@%@%@",s1,@"\r",s2];
 			int magazinAntwort=NSRunAlertPanel(@"Magazin einrichten", MagazinString,@"OK", NULL,NULL);
 			
@@ -3444,8 +3444,8 @@ const short kRecPlayUmgebung=0;
   
                  if (!erfolg)//Umnumerieren erfolglos
 					  {
-						NSString* s1=NSLocalizedString(@"The record %@ could not be renumbered",@"Die Aufnahme %@ konnte nicht neu nummeriert werden.");
-						 NSString* s2=NSLocalizedString(@"Error While Renumbering Records",@"Fehler beim Umnummerieren");
+						NSString* s1=@"Die Aufnahme %@ konnte nicht neu nummeriert werden.";
+						 NSString* s2=@"Fehler beim Umnummerieren";
 						   NSString* FehlerString=[NSString stringWithFormat:s1,tempAufnahme];
 						  NSAlert *Warnung = [[NSAlert alloc] init];
 						  [Warnung addButtonWithTitle:@"OK"];

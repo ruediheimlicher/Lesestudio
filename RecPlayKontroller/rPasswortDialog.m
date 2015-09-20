@@ -66,8 +66,8 @@ if ([[neuesPW1Feld stringValue]length]==0)
 	{
 	NSAlert *Warnung = [[NSAlert alloc] init];
 	[Warnung addButtonWithTitle:@"OK"];
-	[Warnung setMessageText:NSLocalizedString(@"Input Error:",@"Eingabefehler:")];
-	[Warnung setInformativeText:NSLocalizedString(@"The password may not be empty",@"Das Passwort darf nicht leer sein.")];
+	[Warnung setMessageText:@"Eingabefehler:"];
+	[Warnung setInformativeText:@"Das Passwort darf nicht leer sein."];
 	[Warnung setAlertStyle:NSWarningAlertStyle];
 	[Warnung runModal];
 	
@@ -101,10 +101,10 @@ if ([[neuesPW1Feld stringValue]length]==0)
 		neuesPasswortOK=NO;
 		[neuesPW2Feld setStringValue:@""];
 		NSAlert *Warnung = [[NSAlert alloc] init];
-		[Warnung addButtonWithTitle:NSLocalizedString(@"Repeat",@"Wiederholen")];
-		[Warnung addButtonWithTitle:NSLocalizedString(@"Cancel",@"Abbrechen")];
-		[Warnung setMessageText:NSLocalizedString(@"Input Error:",@"Eingabefehler:")];
-		NSString* s=NSLocalizedString(@"The second input does not match the first", @"Die zweite Eingabe stimmt nicht mit der ersten Ÿberein.");
+		[Warnung addButtonWithTitle:@"Wiederholen"];
+		[Warnung addButtonWithTitle:@"Abbrechen"];
+		[Warnung setMessageText:@"Eingabefehler:"];
+		NSString* s= @"Die zweite Eingabe stimmt nicht mit der ersten Ÿberein.";
 		NSString* InformationString=[NSString stringWithFormat:@"%@",s];
 		[Warnung setInformativeText:InformationString];
 
@@ -239,11 +239,11 @@ return [neuerPasswortDic copy];
 			BOOL result=[[self window]makeFirstResponder:altesPWFeld];
 			NSLog(@"result: %d",result);
 			NSAlert *Warnung = [[NSAlert alloc] init];
-			[Warnung addButtonWithTitle:NSLocalizedString(@"Repeat",@"Wiederholen")];
-			[Warnung addButtonWithTitle:NSLocalizedString(@"Cancel",@"Abbrechen")];
-			[Warnung setMessageText:NSLocalizedString(@"Input Error",@"Eingabefehler")];
+			[Warnung addButtonWithTitle:@"Wiederholen"];
+			[Warnung addButtonWithTitle:@"Abbrechen"];
+			[Warnung setMessageText:@"Eingabefehler"];
 			
-			NSString* s=NSLocalizedString(@"The old password is wrong",@"Das alte Passwort ist falsch.");
+			NSString* s=@"Das alte Passwort ist falsch.";
 			NSString* InformationString=[NSString stringWithFormat:@"%@",s];
 			[Warnung setInformativeText:InformationString];
 			

@@ -45,12 +45,12 @@
 NSLog(@"reportBearbeiten: state: %d",[sender state]);
 if ([sender state])
 {
-[BearbeitenTaste setTitle:NSLocalizedString(@"Save Password",@"Passwort sichern")];
+[BearbeitenTaste setTitle:@"Passwort sichern"];
 [SchliessenTaste setEnabled:NO];
 }
 else
 {
-[BearbeitenTaste setTitle:NSLocalizedString(@"Change Password",@"Passwort bearbeiten")];
+[BearbeitenTaste setTitle:@"Passwort bearbeiten"];
 [SchliessenTaste setEnabled:YES];
 [[self window]makeFirstResponder:PasswortTable];
 }
@@ -63,7 +63,7 @@ else
 {
 [PasswortTable selectRowIndexes:[NSIndexSet indexSetWithIndex:0]byExtendingSelection:NO];
 [[PasswortTable tableColumnWithIdentifier:@"passwort"]setEditable:NO];
-[BearbeitenTaste setTitle:NSLocalizedString(@"Change Password",@"Passwort bearbeiten")];
+[BearbeitenTaste setTitle:@"Passwort bearbeiten"];
 [SchliessenTaste setEnabled:YES];
 [NSApp stopModalWithCode:0];
 [[self window]orderOut:NULL];

@@ -55,11 +55,11 @@ extern const int StartmitDialog;//=2;
 	[TitelString setTextColor: TitelFarbe];
 	[EingabeFeld setDelegate:self];
 	[[self window]makeFirstResponder:ProjektTable];
-	[AufnehmenTaste setToolTip:NSLocalizedString(@"Perform new Record",@"Eine neue Aufnahme beginnen")];
-	[AdminTaste setToolTip:NSLocalizedString(@"With password only:\nOpen administrator window.",@"Nur mit Passwort:\nAdministratorfenster šffnen.")];
-	[CancelTaste setToolTip:NSLocalizedString(@"Quit application.",@"Programm beenden.")];
-	[ProjektTable setToolTip:NSLocalizedString(@"List of available project folders.",@"Liste der vorhandenen Projektordner.")];
-	[NeuesProjektTaste setToolTip:NSLocalizedString(@"Create a new project.",@"Neues Projekt.")];
+	[AufnehmenTaste setToolTip:@"Eine neue Aufnahme beginnen"];
+	[AdminTaste setToolTip:@"Nur mit Passwort:\nAdministratorfenster šffnen."];
+	[CancelTaste setToolTip:@"Programm beenden."];
+	[ProjektTable setToolTip:@"Liste der vorhandenen Projektordner."];
+	[NeuesProjektTaste setToolTip:@"Neues Projekt."];
 	//NSLog(@"ProjektStart awake end");
 }
 /*

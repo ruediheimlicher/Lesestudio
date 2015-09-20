@@ -583,8 +583,14 @@
    //NSLog(@"saveRecord hiddenAufnahmePfad: %@",self.hiddenAufnahmePfad);
    if ([self.Leser length]==0)
    {
-      long Antwort=NSRunAlertPanel(@"Wer hat gelesen?", @"Vor dem Sichern muss ein Name ausgewählt sein",@"OK", NULL,NULL);
-      
+      NSAlert *Warnung = [[NSAlert alloc] init];
+      [Warnung addButtonWithTitle:@"OK"];
+      [Warnung setMessageText:@"Wer hat gelesen?"];
+      [Warnung setInformativeText:@"Vor dem Sichern muss ein Name ausgewählt sein"];
+      [Warnung setAlertStyle:NSWarningAlertStyle];
+      [Warnung runModal];
+
+       
       return;
    }
    

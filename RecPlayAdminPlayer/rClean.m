@@ -880,7 +880,7 @@ return tempTitelArray;
 				}
 			  }
 			
-			[CleanOptionDic setObject:[NSNumber numberWithInt:[[ClearAnzahlPop selectedItem]tag]] forKey:@"clearanzahl"];
+			[CleanOptionDic setObject:[NSNumber numberWithLong:[[ClearAnzahlPop selectedItem]tag]] forKey:@"clearanzahl"];
 			
 			
 			NSNotificationCenter * nc;
@@ -893,7 +893,7 @@ return tempTitelArray;
 			NSAlert *Warnung = [[NSAlert alloc] init];
 			[Warnung addButtonWithTitle:@"OK"];
 			//[Warnung addButtonWithTitle:@"Cancel"];
-			[Warnung setMessageText:@"Fehler beim Auswählen"];
+			[Warnung setMessageText:@"Fehler beim Auswaehlen"];
 			[Warnung setInformativeText:FehlerString];
 			[Warnung setAlertStyle:NSWarningAlertStyle];
          [Warnung runModal];

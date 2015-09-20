@@ -63,12 +63,12 @@
 	[PWTaste setState:NO];
 	[[self window]makeFirstResponder:EingabeFeld];
 	//[SchliessenTaste setKeyEquivalent:@"\r"];
-	[ProjektTable setToolTip:NSLocalizedString(@"List of all projects.\nActive projects can be choosen by the reader.\nFixed Titles cannot be edited by the reader.",@"Projeltliste")];
-	[EingabeFeld setToolTip:NSLocalizedString(@"Name for new project.",@"Name des neuen Projekts")];
-	[FixTaste setToolTip:NSLocalizedString(@"Fix the titles of new records.\nThe list of titles can be changed in menu 'Admin->Change Nameliste'.",@"Titel fixieren")];
-	[InListeTaste setToolTip:NSLocalizedString(@"Create a new project folder and insert it into the list.",@"Einen neuen Projektordner einrichten und in der Liste einsetzen.")];
-	[AuswahlenTaste setToolTip:NSLocalizedString(@"Choose the clicked project.",@"Das angeklickte Projekt auswählen")];
-	[EntfernenTaste setToolTip:NSLocalizedString(@"Remove the clicked project with various options.",@"Das angeklickte Projekt mit verschiedenen Optionen entfernen.")];
+	[ProjektTable setToolTip:@"Liste aller aktiven Projekte.\nAktive Projekte kkennen vom Leser ausgewaehlt werden.\nFixierte Titel kann der Leser nicht aendern."];
+	[EingabeFeld setToolTip:@"Name des neuen Projekts"];
+	[FixTaste setToolTip:@"Titelfuer neue Aufnahmen fixieren.\nDie Liste der Titel kann im Menu 'Admin->Change Nameliste' veraendert werden."];
+	[InListeTaste setToolTip:@"Einen neuen Projektordner einrichten und in der Liste einsetzen."];
+	[AuswahlenTaste setToolTip:@"Das angeklickte Projekt auswählen"];
+	[EntfernenTaste setToolTip:@"Das angeklickte Projekt mit verschiedenen Optionen entfernen."];
 
 
 
@@ -200,8 +200,8 @@ vomStart=NO;
 	  [Warnung addButtonWithTitle:@"Abbrechen"];
 	  [Warnung setMessageText:[NSString stringWithFormat:s3,ProjektEntfernenString]];
 	  
-	  NSString* s1=NSLocalizedString(@"It can be moved into trash or into the folder 'Magazin' in the lecturebox",@"Er kann in den Papierkorb oder in den Ordner 'Magazin' in der Lesebox verschoben werden.");
-	  NSString* s2=NSLocalizedString(@"It can also be removed immediatly. This action cannot be reversed.",@"Er kann auch sofort entfernt werden. Diese Aktion ist aber nicht rückgängig zu machen.");
+	  NSString* s1=@"Er kann in den Papierkorb oder in den Ordner 'Magazin' in der Lesebox verschoben werden.";
+	  NSString* s2=@"Er kann auch sofort entfernt werden. Diese Aktion ist aber nicht rückgängig zu machen.";
 	  NSString* InformationString=[NSString stringWithFormat:@"%@\n%@",s1,s2];
 	  [Warnung setInformativeText:InformationString];
 	  [Warnung setAlertStyle:NSWarningAlertStyle];

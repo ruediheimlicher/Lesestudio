@@ -1,0 +1,27 @@
+                           NSLog(@"AdminMarkCheckbox aktueller state: %ld",[AdminMarkCheckbox state]);
+                           NSLog(@"UserMarkCheckbox  aktueller state: %ld",[UserMarkCheckbox  state]);
+                           
+                           int tempmark = [self AdminMarkVon:KommentarString];
+                           NSLog(@"tempmark: %d",tempmark);
+                           
+                           [AdminMarkCheckbox setState:tempmark];
+                           [UserMarkCheckbox  setState:tempmark];
+                           
+                           NSLog(@"AdminMarkCheckbox neuer state: %ld",[AdminMarkCheckbox state]);
+                           NSLog(@"UserMarkCheckbox  neuer state: %ld",[UserMarkCheckbox state]);
+
+
+AdminMarkCheckbox: <NSButton: 0x608000149060> 
+UserMarkCheckbox:  <NSButton: 0x608000148fb0>
+subviews: (
+    "<NSBox: 0x10197c5c0>",
+    "<NSButton: 0x608000148f00>",
+    "<NSButton: 0x608000148fb0>",
+    "<NSButton: 0x608000149060>"
+)
+
+2015-09-08 09:46:14.777 Lesestudio_20[65310:1372973] AdminMarkCheckbox aktueller state: 0
+2015-09-08 09:46:14.777 Lesestudio_20[65310:1372973] UserMarkCheckbox  aktueller state: 0
+2015-09-08 09:46:14.778 Lesestudio_20[65310:1372973] tempmark: 1
+2015-09-08 09:46:14.778 Lesestudio_20[65310:1372973] AdminMarkCheckbox neuer state: 1
+2015-09-08 09:46:14.778 Lesestudio_20[65310:1372973] UserMarkCheckbox  neuer state: 1

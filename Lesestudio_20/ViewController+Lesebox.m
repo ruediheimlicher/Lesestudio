@@ -106,15 +106,15 @@ enum
                   //NSLog(@"NSAlertSecondButtonReturn: Beenden");
                   //User fragen, ob busy zurückgesetzt werden soll. Notmassnahme
                   NSAlert *BusyWarnung = [[NSAlert alloc] init];
-                  [BusyWarnung addButtonWithTitle:NSLocalizedString(@"Reset Data Folder",@"Datenordner zurücksetzen")];
+                  [BusyWarnung addButtonWithTitle:@"Datenordner zurücksetzen"];
                   //[BusyWarnung addButtonWithTitle:@""];
                   //[BusyWarnung addButtonWithTitle:@""];
-                  [BusyWarnung addButtonWithTitle:NSLocalizedString(@"Just terminate",@"Sofort beenden")];
-                  NSString* MessageString=NSLocalizedString(@"Data Folder Busy",@"Datenordner besetzt");
+                  [BusyWarnung addButtonWithTitle:@"Sofort beenden"];
+                  NSString* MessageString=@"Datenordner besetzt";
                   [BusyWarnung setMessageText:[NSString stringWithFormat:@"%@",MessageString]];
                   
-                  NSString* s1=NSLocalizedString(@"There is a problem with the state of thedata folder.",@"Es gibt ein Problem mit dem Status des Datenordners.");
-                  NSString* s2=NSLocalizedString(@"Do you want to reset its state before terminating?",@"Soll sein Status vor dem Beenden zurückgesetzt werden?");
+                  NSString* s1=@"Es gibt ein Problem mit dem Status des Datenordners.";
+                  NSString* s2=@"Soll sein Status vor dem Beenden zurückgesetzt werden?";
                   NSString* InformationString=[NSString stringWithFormat:@"%@\n%@",s1,s2];
                   [BusyWarnung setInformativeText:InformationString];
                   [BusyWarnung setAlertStyle:NSWarningAlertStyle];
@@ -907,7 +907,7 @@ enum
 
 - (BOOL)ArchivValidAnPfad:(NSString*)derLeseboxPfad
 {
-   NSString* locBeenden=NSLocalizedString(@"Beenden",@"Beenden");
+   NSString* locBeenden=@"Beenden";
    
    BOOL ArchivValid=0;
    NSFileManager *Filemanager=[NSFileManager defaultManager];
@@ -921,8 +921,8 @@ enum
         ArchivValid=[Filemanager createDirectoryAtPath:tempArchivPfad  withIntermediateDirectories:NO attributes:NULL error:NULL];
         if (!ArchivValid)
         {
-           NSString* s1=NSLocalizedString(@"Creating The Archive: ",@"Archiv einrichten:");
-           NSString* s2=NSLocalizedString(@"The folder 'Archive' couln't be created on the choosen machine",@"Kein Archiv auf gewählten Comp");
+           NSString* s1=@"Archiv einrichten:";
+           NSString* s2=@"Kein Archiv auf gewählten Computer";
            int Antwort=NSRunAlertPanel(s1,s2,locBeenden, nil,nil);
            [Utils setPListBusy:NO anPfad:self.LeseboxPfad];
            [self terminate:NULL];
@@ -1103,10 +1103,10 @@ enum
    {
       //NSLog(@"ProjektListeValidAnPfad: Archiv ist leer");
       NSAlert *Warnung = [[NSAlert alloc] init];
-      [Warnung addButtonWithTitle:NSLocalizedString(@"Enter Project",@"Projekt eingeben")];
-      [Warnung addButtonWithTitle:NSLocalizedString(@"Create manually",@"Manuell einrichten")];
-      [Warnung setMessageText:NSLocalizedString(@"No Project",@"Kein Projekt")];
-      [Warnung setInformativeText:NSLocalizedString(@"At least one project folder must be present in the folder 'Archive'.",@"In'Archiv' mindestens ein Ordner für Projekt")];
+      [Warnung addButtonWithTitle:@"Projekt eingeben"];
+      [Warnung addButtonWithTitle:@"Manuell einrichten"];
+      [Warnung setMessageText:@"Kein Projekt"];
+      [Warnung setInformativeText:@"Im 'Archiv' mindestens ein Ordner für ein Projekt vorhanden sein. \rDas kann im naechsten Schritt eingerichtet werden."];
       [Warnung setAlertStyle:NSWarningAlertStyle];
       NSImage* RPImage = [NSImage imageNamed: @"MicroIcon"];
       
@@ -1675,7 +1675,6 @@ enum
       }
    }
    
-   // NSString* NamenwahlString=NSLocalizedString(@"Choose name",@"Namen auswählen");
    NSString* NamenwahlString=@"Namen auswählen";
    
    NSDictionary* tempItemAttr=[NSDictionary dictionaryWithObjectsAndKeys:[NSColor purpleColor], NSForegroundColorAttributeName,[NSFont systemFontOfSize:13], NSFontAttributeName,nil];
@@ -2003,7 +2002,6 @@ enum
    //NSLog(@"saveSessionForUser: PList: %@",[PListDic  description]);
    //NSLog(@"SessionListeAktualisierenInProjekt: LeseboxPfad: %@",LeseboxPfad);
    
-   //NSString* PListName=NSLocalizedString(@"Lecturebox.plist",@"Name Lesebox.plist");
    NSString* PListName=@"Lesebox.plist";
    NSString* PListPfad;
    
@@ -2189,11 +2187,11 @@ enum
       }
       if (self.mitUserPasswort)
       {
-         [self.PWFeld setStringValue:NSLocalizedString(@"With Password",@"Mit Passwort")];
+         [self.PWFeld setStringValue:@"Mit Passwort"];
       }
       else
       {
-         [self.PWFeld setStringValue:NSLocalizedString(@"Without Password",@"Ohne Passwort")];
+         [self.PWFeld setStringValue:@"Ohne Passwort"];
       }
       //NSLog(@"anderesProjektEinrichtenMit: Umgbung: %d       tempProjektDic: %@",Umgebung, [tempProjektDic description]);
    }
@@ -2342,12 +2340,12 @@ enum
    
    //	NSLog(@"savePListAktion projektarray aus PList: %@",[[PListDic objectForKey:@"projektarray"] description]);
    
-   //NSString* PListName=NSLocalizedString(@"Lecturebox.plist",@"Name Lesebox.plist");
    NSString* PListName=@"Lesebox.plist";
    NSString* PListPfad;
    
    NSFileManager *Filemanager=[NSFileManager defaultManager];
-   
+   if ([self.LeseboxPfad length])
+   {
    NSString* DataPath=[self.LeseboxPfad stringByAppendingPathComponent:@"Data"];
    BOOL istDirectory=YES;
    if(!([Filemanager fileExistsAtPath:DataPath isDirectory:&istDirectory]&&istDirectory))
@@ -2495,8 +2493,6 @@ enum
    //NSLog(@"**savePListAktion: tempPfad nach data: %@",tempPfad);
    
    NSString* tempUserPfad=[self.LeseboxPfad copy];
-   //	NSString* PListName=NSLocalizedString(@"Lecturebox.plist",@"Name Lesebox.plist");
-   //	NSString* PListPfad;
    //NSLog(@"savePListAktion: tempUserPfad start: %@  istSystemVolume: %d",tempUserPfad,istSystemVolume);
    if (self.istSystemVolume)
    {
@@ -2531,7 +2527,7 @@ enum
    //NSLog(@"***\nsavePListAktion: %@",[PListDic description]);
    BOOL PListOK=[self.PListDic writeToFile:PListPfad atomically:YES];
    //NSLog(@"\nsavePListAktion: PListOK: %d",PListOK);
-   
+   }
    //[tempUserInfo release];
 }
 

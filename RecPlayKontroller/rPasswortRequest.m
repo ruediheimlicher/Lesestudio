@@ -83,10 +83,10 @@
 			//NSLog(@"PasswortRequest reportClose  Passwort falsch");
 			NSAlert *Warnung = [[NSAlert alloc] init];
 			[Warnung addButtonWithTitle:@"OK"];
-			[Warnung setMessageText:NSLocalizedString(@"Wrong Password",@"Falsches Passwort")];
+			[Warnung setMessageText:@"Falsches Passwort"];
 			
-			NSString* s1=NSLocalizedString(@"You have 3 trials",@"Es sind 3 Versuche mšglich");
-			NSString* s2=NSLocalizedString(@"This was trial ",@"Das war Versuch ");
+			NSString* s1=@"Es sind 3 Versuche mšglich";
+			NSString* s2=@"Das war Versuch ";
 			NSString* InformationString=[NSString stringWithFormat:@"%@\n%@ %d",s1,s2,PasswortFehler+1];
 			[Warnung setInformativeText:InformationString];
 			[Warnung setAlertStyle:NSWarningAlertStyle];

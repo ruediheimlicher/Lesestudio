@@ -1728,7 +1728,7 @@ typedef NS_ENUM(NSInteger, A)
 - (void)setPopAMenu:(NSArray*)derArray erstesItem:(NSString*)dasItem aktuell:(NSString*)aktuellerString
 {
    NSLog(@"setPopAMenu  derArray: %@ erstesItem: %@ aktuell: %@",[derArray description], dasItem, aktuellerString);
-   NSString* alle=NSLocalizedString(@"All",@"alle");
+   NSString* alle=@"alle";
    //NSString* namenwaehlen=@"Namen wählen";
    //[PopAMenu synchronizeTitleAndSelectedItem];
    [PopAMenu setEnabled:YES];
@@ -1807,7 +1807,7 @@ typedef NS_ENUM(NSInteger, A)
 
 - (void) setAnzahlPopMenu:(int)dieAnzahl
 {
-   NSString* alle=NSLocalizedString(@"All",@"alle");
+   NSString* alle=@"alle";
    if (dieAnzahl==99)
 	  {
         [AnzahlPop selectItemWithTitle:alle];
@@ -1823,7 +1823,7 @@ typedef NS_ENUM(NSInteger, A)
    //NSLog(@"setProjektMenu: derProjektMenuArray: %@",[derProjektMenuArray description]);
    
    [ProjektPopMenu setEnabled:YES];
-   [ProjektPopPrompt setStringValue:NSLocalizedString(@"Project: ",@"Projekt: ")];
+   [ProjektPopPrompt setStringValue:@"Projekt: "];
    [ProjektPopMenu removeAllItems];
    if ([derProjektMenuArray count])
    {
@@ -1882,7 +1882,7 @@ typedef NS_ENUM(NSInteger, A)
    NSFont* ProjektFont;
    ProjektFont=[NSFont fontWithName:@"Helvetica" size: 12];
    
-   NSString* ProjektString=NSLocalizedString(@"Project: ",@"Projekt: ");
+   NSString* ProjektString=@"Projekt: ";
    NSString* ProjektKopfString=[NSString stringWithFormat:@"%@    %@%@",ProjektString,ProjektTitel,@"\r"];
    
    //Stil für Projektzeile
@@ -1946,11 +1946,11 @@ typedef NS_ENUM(NSInteger, A)
             [KommentarArray removeLastObject];
          }
          [Anz setIntValue:[KommentarArray count]-1];
-         NSString* titel=NSLocalizedString(@"Title:",@"Titel:");
+         NSString* titel=@"Titel:";
          //char * tb=[titel lossyCString];
          const char * tb=[titel cStringUsingEncoding:NSMacOSRomanStringEncoding];
          int Titelbreite=strlen(tb);
-         NSString* name=NSLocalizedString(@"Name",@"Name:");
+         NSString* name=@"Name:";
          //char * nb=[name lossyCString];
          const char * nb=[name cStringUsingEncoding:NSMacOSRomanStringEncoding];
          int Namenbreite=strlen(nb);
@@ -2333,7 +2333,7 @@ typedef NS_ENUM(NSInteger, A)
       }
       else //Keine Kommentare in diesem Projekt
       {
-         TextString=[NSLocalizedString(@"No comments for this Project",@"Keine Kommentare für dieses Projekt") mutableCopy];
+         TextString=(NSMutableString*)@"Keine Kommentare für dieses Projekt";
       }
       
       
@@ -3067,11 +3067,11 @@ typedef NS_ENUM(NSInteger, A)
             //NSLog(@"Komm.Not.Aktion LeserArray: %@	OptionAString: %@  OptionBString. %@",	[LeserArray description],[PopAMenu  titleOfSelectedItem],[PopBMenu  titleOfSelectedItem]);
             if ([LeserArray count]==1)//Nur ein Leser für diesen Titel
             {
-               [self setPopBMenu:LeserArray erstesItem:NULL aktuell:NULL mitPrompt:NSLocalizedString(@"for Reader",@"für Leser:")];
+               [self setPopBMenu:LeserArray erstesItem:NULL aktuell:NULL mitPrompt:@"für Leser:"];
             }
             else
             {
-               [self setPopBMenu:LeserArray erstesItem:alle aktuell:NULL mitPrompt:NSLocalizedString(@"for Reader",@"für Leser:")];
+               [self setPopBMenu:LeserArray erstesItem:alle aktuell:NULL mitPrompt:@"für Leser:"];
             }
             
             
@@ -3144,11 +3144,11 @@ typedef NS_ENUM(NSInteger, A)
                      //NSLog(@"alleVonTitelKommentarOption: LeserArray: %@	[PopAMenu  titleOfSelectedItem]: %@  OptionBString. %@",	[LeserArray description],[PopAMenu  titleOfSelectedItem],[PopBMenu  titleOfSelectedItem]);
                      if ([LeserArray count]==1)//Nur ein Leser für diesen Titel
                      {
-                        [self setPopBMenu:LeserArray erstesItem:NULL aktuell:NULL mitPrompt:NSLocalizedString(@"for Reader",@"für Leser:")];
+                        [self setPopBMenu:LeserArray erstesItem:NULL aktuell:NULL mitPrompt:@"für Leser:"];
                      }
                      else
                      {
-                        [self setPopBMenu:LeserArray erstesItem:alle aktuell:NULL mitPrompt:NSLocalizedString(@"for Reader",@"für Leser:")];
+                        [self setPopBMenu:LeserArray erstesItem:alle aktuell:NULL mitPrompt:@"für Leser:"];
                      }
                   }//Count>0
                }
@@ -3616,7 +3616,7 @@ typedef NS_ENUM(NSInteger, A)
                [KommentarArray removeLastObject];
             }
             [Anz setDoubleValue:[KommentarArray count]-1];
-            NSString* titel=NSLocalizedString(@"Title:",@"Titel:");
+            NSString* titel=@"Titel:";
             //char * tb=[titel lossyCString];
             const char * tb=[titel cStringUsingEncoding:NSMacOSRomanStringEncoding];
             double Titelbreite=strlen(tb);//Minimalbreite für Tabellenkopf von Titel
@@ -3624,7 +3624,7 @@ typedef NS_ENUM(NSInteger, A)
             {
                maxTitelbreite=Titelbreite;
             }
-            NSString* name=NSLocalizedString(@"Name",@"Name:");
+            NSString* name=@"Name:";
             //char * nb=[name lossyCString];
             const char * nb=[name cStringUsingEncoding:NSMacOSRomanStringEncoding];
             double Namenbreite=strlen(nb);//Minimalbreite für Tabellenkopf von Name
@@ -3700,7 +3700,7 @@ typedef NS_ENUM(NSInteger, A)
       NSFont* ProjektFont;
       ProjektFont=[NSFont fontWithName:@"Helvetica" size: 12];
       
-      NSString* ProjektString=NSLocalizedString(@"Project: ",@"Projekt: ");
+      NSString* ProjektString=@"Projekt: ";
       NSString* ProjektKopfString=[NSString stringWithFormat:@"%@    %@%@",ProjektString,ProjektTitel,@"\r"];
       
       //Stil für Projektzeile
@@ -3733,7 +3733,7 @@ typedef NS_ENUM(NSInteger, A)
       }
       else //Keine Kommentare in diesem Projekt
       {
-         TextString=[NSLocalizedString(@"No comments for this Project",@"Keine Kommentare für dieses Projekt") mutableCopy];
+         TextString=(NSMutableString*)@"Keine Kommentare für dieses Projekt";
       }
       
       

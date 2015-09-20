@@ -74,10 +74,10 @@
 	[RecPlayIcon setImage:RecPlayImage];
 //	[NetzwerkDrawer setMinContentSize:NSMakeSize(100, 100)];
     //[NetzwerkDrawer setMaxContentSize:NSMakeSize(400, 400)];
-	[AbbrechenKnopf setToolTip:NSLocalizedString(@"Quit application.",@"Programm beenden.")];
-	[AuswahlenKnopf setToolTip:NSLocalizedString(@"Choose the klicked user.",@"Den angeklickten Benutzer auswählen.")];
-	[NetzwerkKnopf setToolTip:NSLocalizedString(@"Open a panel to connect to a network user.",@"Öffnet ein Dialogfeld, um die Verbindung zu einen Benutzer im Netzwerk einzurichten.")];
-	[UserTable setToolTip:NSLocalizedString(@"List of logged in users.",@"Liste der angemeldeten Benutzer.")];
+	[AbbrechenKnopf setToolTip:@"Programm beenden."];
+	[AuswahlenKnopf setToolTip:@"Den angeklickten Benutzer auswählen."];
+	[NetzwerkKnopf setToolTip:@"Öffnet ein Dialogfeld, um die Verbindung zu einen Benutzer im Netzwerk einzurichten."];
+	[UserTable setToolTip:@"Liste der angemeldeten Benutzer."];
 //	NSLog(@"rVolumes: awakeFromNib end");
 }
 
@@ -158,7 +158,7 @@
 						if ([tempUserDic objectForKey:@"netzvolumepfad"])
 						{
 							NSString* tempVolumeDocumentPfad=[[tempUserDic objectForKey:@"netzvolumepfad"]stringByAppendingPathComponent:@"Documents"];
-							NSString* tempVolumeLeseboxPfad=[tempVolumeDocumentPfad stringByAppendingPathComponent:NSLocalizedString(@"Lesebox",@"Lesebox")];
+							NSString* tempVolumeLeseboxPfad=[tempVolumeDocumentPfad stringByAppendingPathComponent:@"Lesebox"];
 							[tempUserDic setObject:tempVolumeLeseboxPfad forKey:@"volumeleseboxpfad"];
 				
 							
@@ -226,7 +226,7 @@
 		
 	}
 	//NSLog(@"Volumes setUserArray :	UserArray fertig: %@",[UserArray description]);
-	NSString* NetzwerkString=NSLocalizedString(@"Find the Lecturebox in the network",@"Lesebox im Netz suchen");
+	NSString* NetzwerkString=@"Lesebox im Netz suchen";
 	//[tempArray release];
 	//[UserArray addObject:NetzwerkString];
 //	[UserDic setObject:@"Netzwerk" forKey:NetzwerkString];
@@ -459,8 +459,8 @@
 	[LeseboxDialog setCanChooseDirectories:YES];
 	[LeseboxDialog setCanChooseFiles:NO];
 	[LeseboxDialog setAllowsMultipleSelection:NO];
-	NSString* s1=NSLocalizedString(@"\nOn which Machine IN THE 2nd. COLUMN should be the lecturebox?",@"LB auf welchem Comp?");
-	NSString* s2=NSLocalizedString(@"The lecturebox can also be created after login.",@"Lesebox auch nach login");
+	NSString* s1=@"LB auf welchem Computer in der ZWEITEN KOLONNE soll die Lesebox eingerichtet werden?";
+	NSString* s2=@"Die Lesebox auch nach dem Login eingerichtet werden";
 	NSString* s3=@"";//NSLocalizedString(@"\nAfter login, the user must be choosen in the LEFTMOST COLUMN.\n",@"Auswählen in Kol- ganz links");
 	NSFont* TitelFont=[NSFont fontWithName:@"Helvetica" size: 24];
 	NSString* DialogTitelString=[NSString stringWithFormat:@"%@\n%@\n%@",s1,s2,s3];
@@ -519,7 +519,7 @@
 			//Kein gültiger Pfad
 			NSAlert *Warnung = [[NSAlert alloc] init];
 			[Warnung addButtonWithTitle:@"OK"];			
-			[Warnung setMessageText:NSLocalizedString(@"This is not a valable path for the application",@"Kein gültiger Pfad")];
+			[Warnung setMessageText:@"Kein gültiger Pfad"];
 			[Warnung setAlertStyle:NSWarningAlertStyle];
 			
 			//[Warnung setIcon:RPImage];
